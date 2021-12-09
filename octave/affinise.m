@@ -38,6 +38,7 @@
 %%
 %%      SEE ALSO
 %%          :
+%%          homogenise
 %%          length
 %%          min
 %%          size

@@ -37,8 +37,7 @@
 %%              more than one is given, NaN will be returned.
 %%
 %%      SEE ALSO
-%%          :
-%%          length
+%%          affinise
 %%          min
 %%          size
 %%
@@ -68,8 +67,8 @@
 
 function V = homogenise (X = []);
     if nargin == 1 && min (size (X)) == 1;
-        V = [V 1];
-    elseif nargin == 0 || min (size (X)) == 0;
+        V = [X 1];
+    elseif nargin == 0 || nargin == 1 && min (size (X)) == 0;
         V = 1;
     else;
         V = NaN;
