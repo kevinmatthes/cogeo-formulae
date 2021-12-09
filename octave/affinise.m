@@ -18,6 +18,32 @@
 %%
 %%%%
 %%
+%% -- V = affinise (X)
+%%      Reduce the dimension of a vector.
+%%
+%%      PARAMETERS
+%%          X
+%%              The vector to reduce the dimension of.  In case it is not a
+%%              vector but a matrix, NaN will be returned.
+%%
+%%              In case that no value for X is passed to the function, NaN is
+%%              assumed.
+%%
+%%      RETURN
+%%          V
+%%              The vector with a reduced dimension.
+%%
+%%              In case that parameter or more than one is given, NaN will be
+%%              returned.
+%%
+%%      SEE ALSO
+%%          :
+%%          length
+%%          min
+%%          size
+%%
+%%%%
+%%
 %%      FILE
 %%          affinise.m
 %%
