@@ -41,6 +41,7 @@ REMOVE	:= rm
 
 # Make directories.
 MDOCS	:= -C ./.docs/
+MOCT	:= -C ./octave/
 
 # Concrete files.
 PDF	:= ./.docs/documentation.pdf
@@ -53,9 +54,12 @@ PDF	:= ./.docs/documentation.pdf
 #
 ##
 
-.PHONY: default manual pdf tidy
+.PHONY: default install manual pdf tidy uninstall
 
-default: pdf
+default: install
+
+install:
+	make $(MOCT) install
 
 manual: $(PDF)
 	$(COPY) $(PDF) ./cogeo-formulae.pdf
@@ -68,5 +72,8 @@ $(PDF):
 tidy: manual
 	make $(MDOCS) tidy
 	$(REMOVE) $(wildcard ./*.pdf)
+
+uninstall:
+	make $(MOCT) uninstall
 
 ################################################################################
