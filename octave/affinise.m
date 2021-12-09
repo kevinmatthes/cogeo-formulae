@@ -33,7 +33,7 @@
 %%          V
 %%              The vector with a reduced dimension.
 %%
-%%              In case that parameter or more than one is given, NaN will be
+%%              In case that no parameter or more than one is given, NaN will be
 %%              returned.
 %%
 %%      SEE ALSO
