@@ -19,10 +19,10 @@
 %%%%
 %%
 %%      FILE
-%%          install_cogeo_formulae.m
+%%          uninstall_cogeo_formulae.m
 %%
 %%      BRIEF
-%%          Install the Computer Geometry formulas.
+%%          Uninstall the Computer Geometry formulas.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -40,8 +40,8 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Add the installation path to Octave.
-addpath ('~/octave/cogeo-formulae');
+% Remove the installation path to Octave.
+rmpath ('~/octave/cogeo-formulae');
 savepath ('~/.octaverc');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
