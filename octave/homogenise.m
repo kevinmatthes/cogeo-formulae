@@ -66,7 +66,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function V = affinise (X = []);
+function V = homogenise (X = []);
     if nargin == 1 && min (size (X)) == 1;
         V = [V 1];
     elseif nargin == 0 || min (size (X)) == 0;
