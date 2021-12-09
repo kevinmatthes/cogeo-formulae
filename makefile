@@ -62,7 +62,7 @@ manual: $(PDF)
 
 pdf: $(PDF)
 
-$(PDF)
+$(PDF):
 	make $(MDOCS) default
 
 tidy: manual
