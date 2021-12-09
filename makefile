@@ -36,26 +36,10 @@
 ##
 
 # Software.
-COPY	:= cp
-LISTER	:= cat
 NEWDIR	:= mkdir
-PANDOC	:= pandoc
-REMOVE	:= rm
-
-# Software flags.
-PFLAGS	:= -N
 
 # Make directories.
 MDOCS	:= -C ./.docs/
-MLEX	:= -C ./lex/
-
-# Directories.
-DOCSDIR	:= ../.docs/
-DIRS	:= $(DOCSDIR)
-
-# Concrete files.
-CONTRIBUTING	:= ./CONTRIBUTING.md
-LICENSE			:= ./LICENSE
 
 
 
@@ -65,37 +49,14 @@ LICENSE			:= ./LICENSE
 #
 ##
 
-.PHONY: default install lexers license pdf software submodule tidy uninstall
+.PHONY: default pdf tidy
 
-default: submodule
-
-$(DIRS):
-	$(NEWDIR) $@
-
-install:
-	make $(MLEX) install
-
-lexers:
-	make $(MLEX) lexers
-
-license: $(LICENSE)
-	$(COPY) $^ ../
+default: pdf
 
 pdf:
 	make $(MDOCS) default
 
-software:
-	make $(MDOCS) software
-
-submodule: $(CONTRIBUTING)
-	$(COPY) $(CONTRIBUTING) ../
-	make $(MDOCS) submodule
-
 tidy:
 	make $(MDOCS) tidy
-	make $(MLEX) tidy
-
-uninstall:
-	make $(MLEX) uninstall
 
 ################################################################################
