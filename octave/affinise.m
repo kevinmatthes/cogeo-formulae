@@ -31,7 +31,7 @@
 %%
 %%      RETURN
 %%          V
-%%              The vector with a reduced dimension.
+%%              The vector with the reduced dimension.
 %%
 %%              In case that no parameter or more than one is given, NaN will be
 %%              returned.

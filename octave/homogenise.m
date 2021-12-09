@@ -18,23 +18,23 @@
 %%
 %%%%
 %%
-%% -- V = affinise (X)
-%%      Reduce the dimension of a vector.
+%% -- V = homogenise (X)
+%%      Increase the dimension of a vector.
 %%
 %%      PARAMETERS
 %%          X
-%%              The vector to reduce the dimension of.  In case it is not a
+%%              The vector to increase the dimension of.  In case it is not a
 %%              vector but a matrix, NaN will be returned.
 %%
-%%              In case that no value for X is passed to the function, NaN is
-%%              assumed.
+%%              In case that no value for X is passed to the function, [] is
+%%              assumed.  In case X is an empty vector, 1 will be returned.
 %%
 %%      RETURN
 %%          V
-%%              The vector with a reduced dimension.
+%%              The vector with the increased dimension.
 %%
-%%              In case that no parameter or more than one is given, NaN will be
-%%              returned.
+%%              In case that no parameter is given, 1 will be returned.  In case
+%%              more than one is given, NaN will be returned.
 %%
 %%      SEE ALSO
 %%          :
@@ -45,10 +45,10 @@
 %%%%
 %%
 %%      FILE
-%%          affinise.m
+%%          homogenise.m
 %%
 %%      BRIEF
-%%          Reduce the dimension of a vector.
+%%          Increase the dimension of a vector.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -66,12 +66,11 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function V = affinise (X = NaN);
-    if nargin == 1 && min (size (X)) == 1 && length (X) > 1;
-        len = length (X);
-        V = X(1 : len - 1) / X(len);
-    elseif length (X) == 1;
-        V = [];
+function V = affinise (X = []);
+    if nargin == 1 && min (size (X)) == 1;
+        V = [V 1];
+    elseif nargin == 0 || min (size (X)) == 0;
+        V = 1;
     else;
         V = NaN;
     end;
