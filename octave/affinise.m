@@ -19,10 +19,10 @@
 %%%%
 %%
 %%      FILE
-%%          install_cogeo_formulae.m
+%%          affinise.m
 %%
 %%      BRIEF
-%%          Install the Computer Geometry formulas.
+%%          Reduce the dimension of a vector.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -40,8 +40,15 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Add the installation path to Octave.
-addpath ('~/octave/cogeo-formulae');
-savepath ('~/.octaverc');
+function V = affinise (X = NaN);
+    if nargin == 1 && min (size (X)) == 1 && length (X) > 1;
+        len = length (X);
+        V = X(1 : len - 1) / X(len);
+    else;
+        V = NaN;
+    end;
+
+    return;
+end;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
