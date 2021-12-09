@@ -36,10 +36,14 @@
 ##
 
 # Software.
-NEWDIR	:= mkdir
+COPY	:= cp
+REMOVE	:= rm
 
 # Make directories.
 MDOCS	:= -C ./.docs/
+
+# Concrete files.
+PDF	:= ./.docs/documentation.pdf
 
 
 
@@ -49,14 +53,20 @@ MDOCS	:= -C ./.docs/
 #
 ##
 
-.PHONY: default pdf tidy
+.PHONY: default manual pdf tidy
 
 default: pdf
 
-pdf:
+manual: $(PDF)
+	$(COPY) $(PDF) ./cogeo-formulae.pdf
+
+pdf: $(PDF)
+
+$(PDF)
 	make $(MDOCS) default
 
-tidy:
+tidy: manual
 	make $(MDOCS) tidy
+	$(REMOVE) $(wildcard ./*.pdf)
 
 ################################################################################
