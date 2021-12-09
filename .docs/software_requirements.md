@@ -57,29 +57,6 @@ It can be altered as desired.
 
 
 
-## `gcc` (`CC`)
-
-The C source code of this project needs to be compiled using an according
-compiler which supports at least C99.
-
-It can be altered as desired as long as the substitute supports the following
-features:
-
-* standard C99
-* passing of symbolic constants (`#define`)
-* linking with static C libraries
-
-
-
-## `lex` (`LEX`)
-
-The default UNIX utility for scanner creation is required in order to create C
-sources files for compilation from the lex files of this repository.
-
-It should not be altered.  `lex` is part of the `flex` package.
-
-
-
 ## `mkdir` (`NEWDIR`)
 
 The default UNIX utility in order to create new directories ensures mandatory
