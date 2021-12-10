@@ -18,9 +18,9 @@
 %%
 %%%%
 %%
-%% -- R = rotx3 (phi)
-%%      Determine the homogenous rotation matrix for a rotation around the x
-%%      axis by the angle phi in a 3D space, measured in radians.
+%% -- R = rot3 (phi, X)
+%%      Determine the homogenous rotation matrix for a rotation around a custom
+%%      axis X by the angle phi in a 3D space, measured in radians.
 %%
 %%      PARAMETERS
 %%          phi
@@ -29,12 +29,19 @@
 %%              In case that no value for phi is passed to the function, NaN is
 %%              assumed.
 %%
+%%          X
+%%              The axis to rotate around, given by its direction vector.  Needs
+%%              to contain the point of origin.
+%%
+%%              In case that no value for X is passed to the function, [1 1 1]
+%%              is assumed.
+%%
 %%      RETURN
 %%          R
 %%              The sparse rotation matrix.
 %%
-%%              In case that no parameter or more than one is given, NaN will be
-%%              returned.
+%%              In case that no parameter or more than two are given, NaN will
+%%              be returned.
 %%
 %%      SEE ALSO
 %%          cos
@@ -68,12 +75,29 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function R = rotx3 (phi = NaN);
+function R = rot3 (phi = NaN, X = [1 1 1]);
     if nargin == 1 && length (phi) == 1;
-        c = cos (phi);
-        s = sin (phi);
+        c   = cos (phi);
+        ic  = 1 - c;
+        s   = sin (phi);
 
-        R = sparse ([1 0 0 0; 0 c -s 0; 0 s c 0; 0 0 0 1]);
+        a = ic + s;
+        b = ic - s;
+
+        R = sparse ([1 b a 0; a 1 b 0; b a 1 0; 0 0 0 1]);
+    elseif nargin == 2 && length (phi) == 1 && length (X) == 3;
+        c   = cos (phi);
+        ic  = 1 - c;
+        s   = sin (phi);
+        x   = X(1);
+        y   = X(2);
+        z   = X(3);
+
+        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0;
+                        ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0;
+                        ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0;
+                        0           0           0           1
+                    ]);
     else;
         R = NaN;
     end;
