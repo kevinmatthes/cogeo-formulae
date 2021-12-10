@@ -46,7 +46,7 @@
 %%%%
 %%
 %%      FILE
-%%          rotx3.m
+%%          roty3.m
 %%
 %%      BRIEF
 %%          Create the homogenous rotation matrix for a rotation around the y
