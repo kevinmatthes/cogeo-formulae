@@ -18,8 +18,8 @@
 %%
 %%%%
 %%
-%% -- R = rotx3 (phi)
-%%      Determine the homogenous rotation matrix for a rotation around the x
+%% -- R = roty3 (phi)
+%%      Determine the homogenous rotation matrix for a rotation around the y
 %%      axis by the angle phi in a 3D space, measured in radians.
 %%
 %%      PARAMETERS
@@ -49,7 +49,7 @@
 %%          rotx3.m
 %%
 %%      BRIEF
-%%          Create the homogenous rotation matrix for a rotation around the x
+%%          Create the homogenous rotation matrix for a rotation around the y
 %%          axis in a 3D space.
 %%
 %%      AUTHOR
@@ -68,12 +68,12 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function R = rotx3 (phi = NaN);
+function R = roty3 (phi = NaN);
     if nargin == 1 && length (phi) == 1;
         c = cos (phi);
         s = sin (phi);
 
-        R = sparse ([1 0 0 0; 0 c -s 0; 0 s c 0; 0 0 0 1]);
+        R = sparse ([c 0 s 0; 0 1 0 0; -s 0 c 0; 0 0 0 1]);
     else;
         R = NaN;
     end;
