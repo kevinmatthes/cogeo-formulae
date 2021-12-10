@@ -42,6 +42,7 @@
 %%          homogenise
 %%          length
 %%          min
+%%          nargin
 %%          size
 %%
 %%%%

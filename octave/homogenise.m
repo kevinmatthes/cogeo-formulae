@@ -40,6 +40,7 @@
 %%          NaN
 %%          affinise
 %%          min
+%%          nargin
 %%          size
 %%
 %%%%
