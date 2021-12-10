@@ -18,39 +18,39 @@
 %%
 %%%%
 %%
-%% -- V = affinise (X)
-%%      Reduce the dimension of a vector.
+%% -- R = rotx3 (phi)
+%%      Determine the homogenous rotation matrix for a rotation around the x
+%%      axis by the angle phi in a 3D space, measured in radians.
 %%
 %%      PARAMETERS
-%%          X
-%%              The vector to reduce the dimension of.  In case it is not a
-%%              vector but a matrix, NaN will be returned.
+%%          phi
+%%              The angle to rotate by.  Measured in radians.
 %%
-%%              In case that no value for X is passed to the function, NaN is
+%%              In case that no value for phi is passed to the function, NaN is
 %%              assumed.
 %%
 %%      RETURN
-%%          V
-%%              The vector with the reduced dimension.
+%%          R
+%%              The sparse rotation matrix.
 %%
 %%              In case that no parameter or more than one is given, NaN will be
 %%              returned.
 %%
 %%      SEE ALSO
-%%          :
-%%          NaN
-%%          homogenise
+%%          cos
 %%          length
-%%          min
-%%          size
+%%          nargin
+%%          sin
+%%          sparse
 %%
 %%%%
 %%
 %%      FILE
-%%          affinise.m
+%%          rotx3.m
 %%
 %%      BRIEF
-%%          Reduce the dimension of a vector.
+%%          Create the homogenous rotation matrix for a rotation around the x
+%%          axis.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -68,14 +68,14 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function V = affinise (X = NaN);
-    if nargin == 1 && min (size (X)) == 1 && length (X) > 1;
-        len = length (X);
-        V = X(1 : len - 1) / X(len);
-    elseif nargin == 1 && min (size (X)) == 1 && length (X) == 1;
-        V = [];
+function R = rotx3 (phi = NaN);
+    if nargin == 1 && length (phi) == 1;
+        c = cos (phi);
+        s = sin (phi);
+
+        R = sparse ([1 0 0 0; 0 c -s 0; 0 s c 0; 0 0 0 1]);
     else;
-        V = NaN;
+        R = NaN;
     end;
 
     return;
