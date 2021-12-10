@@ -50,7 +50,7 @@
 %%
 %%      BRIEF
 %%          Create the homogenous rotation matrix for a rotation around the x
-%%          axis.
+%%          axis in a 3D space.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
