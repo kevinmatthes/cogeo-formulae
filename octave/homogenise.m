@@ -37,6 +37,7 @@
 %%              more than one is given, NaN will be returned.
 %%
 %%      SEE ALSO
+%%          NaN
 %%          affinise
 %%          min
 %%          size
