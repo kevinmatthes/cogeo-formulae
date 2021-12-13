@@ -18,13 +18,13 @@
 %%
 %%%%
 %%
-%% -- R = rot3x (phi)
+%% -- R = rot3xd (phi)
 %%      Determine the homogenous rotation matrix for a rotation around the x
-%%      axis by the angle phi in a 3D space, measured in radians.
+%%      axis by the angle phi in a 3D space, measured in degrees.
 %%
 %%      PARAMETERS
 %%          phi
-%%              The angle to rotate by.  Measured in radians.
+%%              The angle to rotate by.  Measured in degrees.
 %%
 %%              In case that no value for phi is passed to the function, NaN is
 %%              assumed.
@@ -37,16 +37,16 @@
 %%              returned.
 %%
 %%      SEE ALSO
-%%          cos
+%%          cosd
 %%          length
 %%          nargin
-%%          sin
+%%          sind
 %%          sparse
 %%
 %%%%
 %%
 %%      FILE
-%%          rot3x.m
+%%          rot3xd.m
 %%
 %%      BRIEF
 %%          Create the homogenous rotation matrix for a rotation around the x
@@ -68,10 +68,10 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function R = rot3x (phi = NaN);
+function R = rot3xd (phi = NaN);
     if nargin == 1 && length (phi) == 1;
-        c = cos (phi);
-        s = sin (phi);
+        c = cosd (phi);
+        s = sind (phi);
 
         R = sparse ([1 0 0 0; 0 c -s 0; 0 s c 0; 0 0 0 1]);
     else;
