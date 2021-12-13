@@ -18,39 +18,35 @@
 %%
 %%%%
 %%
-%% -- R = rot3x (phi)
-%%      Determine the homogenous rotation matrix for a rotation around the x
-%%      axis by the angle phi in a 3D space, measured in radians.
+%% -- M = move (X)
+%%      Determine the homogenous translation matrix from the given vector X.
 %%
 %%      PARAMETERS
-%%          phi
-%%              The angle to rotate by.  Measured in radians.
+%%          X
+%%              The vector to translate by.
 %%
-%%              In case that no value for phi is passed to the function, NaN is
+%%              In case that no value for X is passed to the function, NaN is
 %%              assumed.
 %%
 %%      RETURN
-%%          R
-%%              The sparse rotation matrix.
+%%          M
+%%              The sparse translation matrix.
 %%
 %%              In case that no parameter or more than one is given, NaN will be
 %%              returned.
 %%
 %%      SEE ALSO
-%%          cos
 %%          length
 %%          nargin
-%%          sin
 %%          sparse
 %%
 %%%%
 %%
 %%      FILE
-%%          rot3x.m
+%%          move.m
 %%
 %%      BRIEF
-%%          Create the homogenous rotation matrix for a rotation around the x
-%%          axis in a 3D space.
+%%          Create the homogenous translation matrix from a given vector.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -68,14 +64,11 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function R = rot3x (phi = NaN);
-    if nargin == 1 && length (phi) == 1;
-        c = cos (phi);
-        s = sin (phi);
-
-        R = sparse ([1 0 0 0; 0 c -s 0; 0 s c 0; 0 0 0 1]);
+function M = move (X = NaN);
+    if nargin == 1 && length (X) == 3;
+        M = sparse ([1 0 0 X(1); 0 1 0 X(2); 0 0 1 X(3); 0 0 0 1]);
     else;
-        R = NaN;
+        M = NaN;
     end;
 
     return;
