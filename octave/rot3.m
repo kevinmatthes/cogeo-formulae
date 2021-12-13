@@ -53,10 +53,10 @@
 %%%%
 %%
 %%      FILE
-%%          rotx3.m
+%%          rot3.m
 %%
 %%      BRIEF
-%%          Create the homogenous rotation matrix for a rotation around the x
+%%          Create the homogenous rotation matrix for a rotation around a custom
 %%          axis in a 3D space.
 %%
 %%      AUTHOR
