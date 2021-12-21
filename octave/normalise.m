@@ -18,40 +18,38 @@
 %%
 %%%%
 %%
-%% -- V = affinise (X)
-%%      Reduce the dimension of a vector.
+%% -- V = normalise (X)
+%%      Normalise a vector.
 %%
 %%      PARAMETERS
 %%          X
-%%              The vector to reduce the dimension of.  In case it is not a
-%%              vector but a matrix, NaN will be returned.
+%%              The vector to normalise.  In case it is either not a vector but
+%%              a matrix or its norm equals zero, NaN will be returned.
 %%
 %%              In case that no value for X is passed to the function, NaN is
 %%              assumed.
 %%
 %%      RETURN
 %%          V
-%%              The vector with the reduced dimension.
+%%              The normalised vector.
 %%
 %%              In case that no parameter or more than one is given, NaN will be
 %%              returned.
 %%
 %%      SEE ALSO
-%%          :
 %%          NaN
-%%          homogenise
-%%          length
 %%          min
 %%          nargin
+%%          norm
 %%          size
 %%
 %%%%
 %%
 %%      FILE
-%%          affinise.m
+%%          normalise.m
 %%
 %%      BRIEF
-%%          Reduce the dimension of a vector.
+%%          Normalise a vector.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -69,12 +67,9 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function V = affinise (X = NaN);
-    if nargin == 1 && min (size (X)) == 1 && length (X) > 1;
-        len = length (X);
-        V = X(1 : len - 1) / X(len);
-    elseif nargin == 1 && min (size (X)) == 1 && length (X) == 1;
-        V = [];
+function V = normalise (X = NaN);
+    if nargin == 1 && min (size (X)) == 1 && norm (X) != 0;
+        V = X / norm (X);
     else;
         V = NaN;
     end;
