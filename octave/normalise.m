@@ -68,7 +68,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function V = normalise (X = NaN);
-    if nargin == 1 && min (size (X)) == 1 && norm (X) != 0;
+    if nargin == 1 && min (size (X)) == 1 && norm (X) ~= 0;
         V = X / norm (X);
     else;
         V = NaN;
