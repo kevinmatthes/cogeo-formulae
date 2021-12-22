@@ -37,6 +37,7 @@
 
 # Software.
 COPY	:= cp
+OCTAVE	:= octave-cli
 REMOVE	:= rm
 
 # Make directories.
@@ -44,7 +45,9 @@ MDOCS	:= -C ./.docs/
 MOCT	:= -C ./octave/
 
 # Concrete files.
-PDF	:= ./.docs/documentation.pdf
+INSTALLER	:= ./install_cogeo_formulae.m
+PDF			:= ./.docs/documentation.pdf
+UNINSTALLER	:= ./uninstall_cogeo_formulae.m
 
 
 
@@ -59,7 +62,7 @@ PDF	:= ./.docs/documentation.pdf
 default: install
 
 install:
-	make $(MOCT) install
+	cd ./octave/ ; $(OCTAVE) $(INSTALLER)
 
 manual: $(PDF)
 	$(COPY) $(PDF) ./cogeo-formulae.pdf
@@ -74,6 +77,6 @@ tidy: manual
 	$(REMOVE) $(wildcard ./*.pdf)
 
 uninstall:
-	make $(MOCT) uninstall
+	cd ./octave/ ; $(OCTAVE) $(UNINSTALLER)
 
 ################################################################################
