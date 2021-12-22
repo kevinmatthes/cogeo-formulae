@@ -20,6 +20,8 @@
 %%
 %%      SEE ALSO
 %%          addpath
+%%          copyfile
+%%          mkdir
 %%          savepath
 %%
 %%%%
