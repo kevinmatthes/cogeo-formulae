@@ -67,8 +67,7 @@ default: install
 $(DIRS):
 	$(NEWDIR) $@
 
-install: $(DIRS) $(SOURCE)
-	$(COPY) $(SOURCE) $(INSTALLDIR)
+install: $(SOURCE)
 	$(OCTAVE) ./install_cogeo_formulae.m
 
 uninstall:

@@ -46,8 +46,22 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Installation information.
+INSTALLDIR  = '~/octave/cogeo-formulae';
+OCTDIR      = '~/octave';
+PATH        = '~/.octaverc';
+
+% Create the required directories if not already existing.
+mkdir (OCTDIR);
+mkdir (INSTALLDIR);
+
+% Copy the source files and related ones to the installation directory.
+copyfile ('./*.m',          INSTALLDIR, 'f');
+copyfile ('../LICENSE',     INSTALLDIR, 'f');
+copyfile ('../README.md',   INSTALLDIR, 'f');
+
 % Add the installation path to Octave.
-addpath ('~/octave/cogeo-formulae');
-savepath ('~/.octaverc');
+addpath  (INSTALLDIR);
+savepath (PATH);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
