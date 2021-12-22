@@ -19,6 +19,8 @@
 %%%%
 %%
 %%      SEE ALSO
+%%          delete
+%%          rmdir
 %%          rmpath
 %%          savepath
 %%
@@ -46,8 +48,17 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Remove the installation path to Octave.
-rmpath ('~/octave/cogeo-formulae');
-savepath ('~/.octaverc');
+% Installation information.
+INSTALLDIR  = '~/octave/cogeo-formulae';
+OCTDIR      = '~/octave';
+PATH        = '~/.octaverc';
+
+% Delete the installation directory and its whole content.
+delete  ([INSTALLDIR '/*']);
+rmdir   (INSTALLDIR);
+
+% Add the installation path to Octave.
+rmpath   (INSTALLDIR);
+savepath (PATH);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
