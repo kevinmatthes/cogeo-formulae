@@ -19,18 +19,18 @@
 %%%%
 %%
 %%      SEE ALSO
-%%          delete
-%%          rmdir
-%%          rmpath
+%%          addpath
+%%          copyfile
+%%          mkdir
 %%          savepath
 %%
 %%%%
 %%
 %%      FILE
-%%          uninstall_cogeo_formulae.m
+%%          install.m
 %%
 %%      BRIEF
-%%          Uninstall the Computer Geometry formulas.
+%%          Install the Computer Geometry formulas.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -53,12 +53,17 @@ INSTALLDIR  = '~/octave/cogeo-formulae';
 OCTDIR      = '~/octave';
 PATH        = '~/.octaverc';
 
-% Delete the installation directory and its whole content.
-delete  ([INSTALLDIR '/*']);
-rmdir   (INSTALLDIR);
+% Create the required directories if not already existing.
+mkdir (OCTDIR);
+mkdir (INSTALLDIR);
+
+% Copy the source files and related ones to the installation directory.
+copyfile ('./octave/*.m', INSTALLDIR, 'f');
+copyfile ('./LICENSE',    INSTALLDIR, 'f');
+copyfile ('./README.md',  INSTALLDIR, 'f');
 
 % Add the installation path to Octave.
-rmpath   (INSTALLDIR);
+addpath  (INSTALLDIR);
 savepath (PATH);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
