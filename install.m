@@ -67,17 +67,44 @@ PATH        = '~/.octaverc';
 %%
 %%%%
 
+% Information banner.
+fprintf ('%%%%%%%% Begin installation. %%%%%%%%\n\n');
+
+
+
 % Create the required directories if not already existing.
+fprintf ('Ensure installation directories ... ');
 mkdir (OCTDIR);
 mkdir (INSTALLDIR);
+disp ('Done.');
+disp (['Installation directory: ' INSTALLDIR '.']);
+
+
 
 % Copy the source files and related ones to the installation directory.
+fprintf ('Copy functions ... ');
 copyfile ('./octave/*.m', INSTALLDIR, 'f');
+disp ('Done.');
+
+fprintf ('Copy license ... ');
 copyfile ('./LICENSE',    INSTALLDIR, 'f');
+disp ('Done.');
+
+fprintf ('Copy readme file ... ');
 copyfile ('./README.md',  INSTALLDIR, 'f');
+disp ('Done.');
+
+
 
 % Add the installation path to Octave.
-addpath  (INSTALLDIR);
+fprintf ('Update path information ... ');
+addpath (INSTALLDIR);
 savepath (PATH);
+disp ('Done.');
+
+
+
+% Leave the script.
+fprintf ('\n%%%%%%%% End installation. %%%%%%%%\n');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

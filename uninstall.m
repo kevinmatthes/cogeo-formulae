@@ -67,12 +67,28 @@ PATH        = '~/.octaverc';
 %%
 %%%%
 
+% Information banner.
+fprintf ('%%%%%%%% Begin uninstallation. %%%%%%%%\n\n');
+
+
+
 % Delete the installation directory and its whole content.
+fprintf ('Remove installation directory with all contents ... ');
 delete ([INSTALLDIR '/*']);
 rmdir  (INSTALLDIR);
+disp ('Done.');
+
+
 
 % Add the installation path to Octave.
-rmpath   (INSTALLDIR);
+fprintf ('Update path information ... ');
+rmpath (INSTALLDIR);
 savepath (PATH);
+disp ('Done.');
+
+
+
+% Leave the script.
+fprintf ('\n%%%%%%%% End uninstallation. %%%%%%%%\n');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
