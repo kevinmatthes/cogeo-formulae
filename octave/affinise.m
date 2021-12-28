@@ -40,6 +40,7 @@
 %%          :
 %%          NaN
 %%          homogenise
+%%          isnumeric
 %%          length
 %%          min
 %%          nargin
@@ -70,13 +71,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function V = affinise (X = NaN);
-    if nargin == 1 && min (size (X)) == 1 && length (X) > 1;
+    V = NaN;
+
+    if nargin == 1 && isnumeric (X) && min (size (X)) == 1;
         len = length (X);
-        V = X(1 : len - 1) / X(len);
-    elseif nargin == 1 && min (size (X)) == 1 && length (X) == 1;
-        V = [];
-    else;
-        V = NaN;
+
+        if len == 1;
+            V = [];
+        elseif len > 1;
+            V = X(1 : len - 1) / X(len);
+        end;
     end;
 
     return;
