@@ -20,6 +20,8 @@
 %%
 %%      SEE ALSO
 %%          delete
+%%          disp
+%%          fprintf
 %%          rmdir
 %%          rmpath
 %%          savepath

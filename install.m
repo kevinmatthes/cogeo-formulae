@@ -21,6 +21,8 @@
 %%      SEE ALSO
 %%          addpath
 %%          copyfile
+%%          disp
+%%          fprintf
 %%          mkdir
 %%          savepath
 %%
