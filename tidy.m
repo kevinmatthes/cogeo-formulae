@@ -93,11 +93,10 @@ end;
 
 
 % Remove any documentation artifacts.
-fprintf ('Clean-up documentation artifacts ...\n\n');
+disp ('Clean-up documentation artifacts ...');
 cd ('./.docs/');
 system ([OCTAVE ' ./tidy.m']);
 cd ('../');
-fprintf ('\n');
 
 
 

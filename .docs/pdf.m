@@ -19,13 +19,9 @@
 %%%%
 %%
 %%      SEE ALSO
-%%          delete
 %%          disp
 %%          fprintf
-%%          ispc
-%%          isunix
 %%          system
-%%          unix
 %%
 %%%%
 %%
