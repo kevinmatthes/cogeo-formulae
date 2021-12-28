@@ -66,8 +66,13 @@ MDOCS   = '-C ./.docs/';
 %%
 %%%%
 
-% Compile the repository manual.
+% Remove any documentation artifacts.
 system ([MAKE ' ' MDOCS ' tidy']);
-delete ('*.pdf');
+
+% Remove the manuals.
+[status ~]  = system ('test -e *.pdf');
+if ~ status;
+    delete ('*.pdf');
+end;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
