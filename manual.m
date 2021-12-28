@@ -19,7 +19,10 @@
 %%%%
 %%
 %%      SEE ALSO
+%%          cd
 %%          copyfile
+%%          disp
+%%          fprintf
 %%          system
 %%
 %%%%
@@ -53,10 +56,7 @@
 %%%%
 
 % Software.
-MAKE    = 'make';
-
-% Make directories.
-MDOCS   = '-C ./.docs/';
+OCTAVE  = 'octave-cli';
 
 % Concrete files.
 DOCUMENTATION   = './.docs/documentation.pdf';
@@ -70,8 +70,22 @@ PDF             = './cogeo-formulae.pdf';
 %%
 %%%%
 
+% Information banner.
+fprintf ('%%%%%%%% Begin manual compilation. %%%%%%%%\n\n');
+
+
+
 % Compile the repository manual.
-system   ([MAKE ' ' MDOCS ' default']);
+disp (['Compile repository manual ' PDF ' ... ']);
+cd ('./.docs/');
+system ([OCTAVE ' ./pdf.m']);
+cd ('../');
 copyfile (DOCUMENTATION, PDF, 'f');
+disp ('Done.');
+
+
+
+% Leave the script.
+fprintf ('\n%%%%%%%% End manual compilation. %%%%%%%%\n');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
