@@ -48,28 +48,11 @@
 
 %%%%
 %%
-%% Variables.
-%%
-%%%%
-
-% Software.
-MAKE    = 'make';
-
-% Make directories.
-MDOCS   = '-C ./.docs/';
-
-
-
-%%%%
-%%
 %% Build steps.
 %%
 %%%%
 
-% Remove any documentation artifacts.
-system ([MAKE ' ' MDOCS ' tidy']);
-
-% Remove the manuals.
+% Remove the manual.
 [status ~]  = system ('test -e *.pdf');
 if ~ status;
     delete ('*.pdf');

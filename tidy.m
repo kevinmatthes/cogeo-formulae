@@ -53,10 +53,7 @@
 %%%%
 
 % Software.
-MAKE    = 'make';
-
-% Make directories.
-MDOCS   = '-C ./.docs/';
+OCTAVE  = 'octave-cli';
 
 
 
@@ -67,7 +64,7 @@ MDOCS   = '-C ./.docs/';
 %%%%
 
 % Remove any documentation artifacts.
-system ([MAKE ' ' MDOCS ' tidy']);
+system ([OCTAVE ' tidy.m']);
 
 % Remove the manuals.
 [status ~]  = system ('test -e *.pdf');
