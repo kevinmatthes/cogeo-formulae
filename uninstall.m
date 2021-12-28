@@ -48,10 +48,24 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%
+%%
+%% Variables.
+%%
+%%%%
+
 % Installation information.
 INSTALLDIR  = '~/octave/cogeo-formulae';
 OCTDIR      = '~/octave';
 PATH        = '~/.octaverc';
+
+
+
+%%%%
+%%
+%% Build steps.
+%%
+%%%%
 
 % Delete the installation directory and its whole content.
 delete ([INSTALLDIR '/*']);

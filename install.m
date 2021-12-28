@@ -48,10 +48,24 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%
+%%
+%% Variables.
+%%
+%%%%
+
 % Installation information.
 INSTALLDIR  = '~/octave/cogeo-formulae';
 OCTDIR      = '~/octave';
 PATH        = '~/.octaverc';
+
+
+
+%%%%
+%%
+%% Build steps.
+%%
+%%%%
 
 % Create the required directories if not already existing.
 mkdir (OCTDIR);
