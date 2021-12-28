@@ -19,16 +19,16 @@
 %%%%
 %%
 %%      SEE ALSO
-%%          copyfile
+%%          delete
 %%          system
 %%
 %%%%
 %%
 %%      FILE
-%%          manual.m
+%%          tidy.m
 %%
 %%      BRIEF
-%%          Compile the manual for the Computer Geometry formulas.
+%%          Clean the repository.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -58,10 +58,6 @@ MAKE    = 'make';
 % Make directories.
 MDOCS   = '-C ./.docs/';
 
-% Concrete files.
-DOCUMENTATION   = './.docs/documentation.pdf';
-PDF             = './cogeo-formulae.pdf';
-
 
 
 %%%%
@@ -71,7 +67,7 @@ PDF             = './cogeo-formulae.pdf';
 %%%%
 
 % Compile the repository manual.
-system   ([MAKE ' ' MDOCS ' default']);
-copyfile (DOCUMENTATION, PDF, 'f');
+system ([MAKE ' ' MDOCS ' tidy']);
+delete ('*.pdf');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
