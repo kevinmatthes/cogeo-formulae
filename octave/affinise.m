@@ -72,15 +72,16 @@
 
 function V = affinise (X = NaN);
     V = NaN;
+    l = NaN;
 
     if nargin == 1 && isnumeric (X) && min (size (X)) == 1;
-        len = length (X);
+        l = length (X);
+    end;
 
-        if len == 1;
-            V = [];
-        elseif len > 1;
-            V = X(1 : len - 1) / X(len);
-        end;
+    if l == 1;
+        V = [];
+    elseif l > 1;
+        V = X(1 : l - 1) / X(l);
     end;
 
     return;
