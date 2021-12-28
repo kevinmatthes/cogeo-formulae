@@ -39,6 +39,7 @@
 %%      SEE ALSO
 %%          NaN
 %%          affinise
+%%          isnumeric
 %%          min
 %%          nargin
 %%          size
@@ -68,12 +69,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function V = homogenise (X = []);
-    if nargin == 1 && min (size (X)) == 1;
-        V = [X 1];
-    elseif nargin == 0 || nargin == 1 && min (size (X)) == 0;
+    V = NaN;
+    d = NaN;
+
+    if nargin == 0;
+        d = 0;
+    elseif nargin == 1 && isnumeric (X);
+        d = min (size (X));
+    end;
+
+    if d == 0;
         V = 1;
-    else;
-        V = NaN;
+    elseif d == 1;
+        V = [X 1];
     end;
 
     return;
