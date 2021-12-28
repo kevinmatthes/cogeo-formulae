@@ -55,6 +55,12 @@
 % Software.
 OCTAVE  = 'octave-cli';
 
+% System information.
+UNIXCMDS    = 0;
+
+% Control variables.
+PDFTODELETE = 0;
+
 
 
 %%%%
