@@ -30,10 +30,10 @@
 %%%%
 %%
 %%      FILE
-%%          tidy.m
+%%          pdf.m
 %%
 %%      BRIEF
-%%          Clean the repository.
+%%          Compile the repository manual.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -57,11 +57,25 @@
 %%
 %%%%
 
-% System information.
-UNIXCMDS    = 0;
+% Software.
+LISTER  = 'cat';
+PANDOC  = 'pandoc';
 
-% Control variables.
-PDFTODELETE = 0;
+% File types.
+YAML    = '*.yaml';
+
+% Concrete files.
+CONTRIBUTING    = '../CONTRIBUTING.md';
+LICENSE         = '../LICENSE';
+LSTART          = './license_begin.md';
+LSTOP           = './license_end.md';
+NEWPAGE         = './newpage.md';
+PDF             = './documentation.pdf';
+README          = '../README.md';
+SOFTWARE        = './software_requirements.md';
+
+% Software flags.
+FLAGS.PANDOC    = [' -N -o ' PDF];
 
 
 
@@ -72,40 +86,32 @@ PDFTODELETE = 0;
 %%%%
 
 % Information banner.
-fprintf ('%%%%%%%% Begin documentation clean-up. %%%%%%%%\n\n');
+fprintf ('%%%%%%%% Begin documentation compilation. %%%%%%%%\n\n');
 
 
 
-% Determine the operating system.
-fprintf ('Determine OS: ');
+% Compile the documentation.
+fprintf ('Compile repository manual ... ');
 
-if isunix;
-    UNIXCMDS = 1;
-    disp ('UNIX.');
-elseif ispc;
-    disp ('Windows.');
-end;
+sections.contributing   = [CONTRIBUTING ' ' NEWPAGE];
+sections.header         = [YAML ' ' NEWPAGE];
+sections.license        = [LSTART ' ' LICENSE ' ' LSTOP ' ' NEWPAGE];
+sections.readme         = [README ' ' NEWPAGE];
+sections.software       = [SOFTWARE ' ' NEWPAGE];
 
+content = [         sections.header         ' '];
+content = [content  sections.readme         ' '];
+content = [content  sections.software       ' '];
+content = [content  sections.contributing   ' '];
+content = [content  sections.license        ' '];
 
+system ([LISTER ' ' content ' | ' PANDOC FLAGS.PANDOC]);
 
-% Check for files to delete.
-disp ('Check for documentation artifacts to remove ...');
-
-if UNIXCMDS;
-    PDFTODELETE = ~ unix ('test -e *.pdf');
-end;
-
-fprintf ('PDF: ');
-if PDFTODELETE;
-    delete ('*.pdf');
-    disp ('found and removed.');
-else;
-    disp ('none.');
-end;
+disp ('Done.');
 
 
 
 % Leave the script.
-fprintf ('\n%%%%%%%% End documentation clean-up. %%%%%%%%\n');
+fprintf ('\n%%%%%%%% End documentation compilation. %%%%%%%%\n');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
