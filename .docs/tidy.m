@@ -69,6 +69,8 @@ PDFTODELETE = 0;
 % Information banner.
 fprintf ('%%%%%%%% Begin documentation clean-up. %%%%%%%%\n\n');
 
+
+
 % Determine the operating system.
 fprintf ('Determine OS: ');
 if isunix;
@@ -78,23 +80,24 @@ elseif ispc;
     disp ('Windows.');
 end;
 
-% Check for files to delete.
-if UNIXCMDS;
-    disp ('Check for documentation artifacts to remove ...');
-    PDFTODELETE = ~ unix ('test -e *.pdf');
 
-    if PDFTODELETE;
-        disp ('PDF artifacts found!');
-    else;
-        disp ('No PDF artifacts found.');
-    end;
+
+% Check for files to delete.
+disp ('Check for documentation artifacts to remove ...');
+
+if UNIXCMDS;
+    PDFTODELETE = ~ unix ('test -e *.pdf');
 end;
 
-% Remove all artifacts.
+fprintf ('PDF: ');
 if PDFTODELETE;
     delete ('*.pdf');
-    disp ('PDF artifacts removed.');
+    disp ('found and removed.');
+else;
+    disp ('none.');
 end;
+
+
 
 % Leave the script.
 fprintf ('\n%%%%%%%% End documentation clean-up. %%%%%%%%\n');
