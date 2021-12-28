@@ -19,18 +19,16 @@
 %%%%
 %%
 %%      SEE ALSO
-%%          addpath
 %%          copyfile
-%%          mkdir
-%%          savepath
+%%          system
 %%
 %%%%
 %%
 %%      FILE
-%%          install.m
+%%          manual.m
 %%
 %%      BRIEF
-%%          Install the Computer Geometry formulas.
+%%          Compile the manual for the Computer Geometry formulas.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -48,22 +46,32 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Installation information.
-INSTALLDIR  = '~/octave/cogeo-formulae';
-OCTDIR      = '~/octave';
-PATH        = '~/.octaverc';
+%%%%
+%%
+%% Variables.
+%%
+%%%%
 
-% Create the required directories if not already existing.
-mkdir (OCTDIR);
-mkdir (INSTALLDIR);
+% Software.
+MAKE    = 'make';
 
-% Copy the source files and related ones to the installation directory.
-copyfile ('./octave/*.m', INSTALLDIR, 'f');
-copyfile ('./LICENSE',    INSTALLDIR, 'f');
-copyfile ('./README.md',  INSTALLDIR, 'f');
+% Make directories.
+MDOCS   = '-C ./.docs/';
 
-% Add the installation path to Octave.
-addpath  (INSTALLDIR);
-savepath (PATH);
+% Concrete files.
+DOCUMENTATION   = './.docs/documentation.pdf';
+PDF             = './cogeo-formulae.pdf';
+
+
+
+%%%%
+%%
+%% Build steps.
+%%
+%%%%
+
+% Compile the repository manual.
+system   ([MAKE ' ' MDOCS ' default']);
+copyfile (DOCUMENTATION, PDF, 'f');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
