@@ -87,12 +87,27 @@ end;
 
 
 % Remove any documentation artifacts.
-system ([OCTAVE ' tidy.m']);
+fprintf ('Clean-up documentation artifacts ...\n\n');
+cd ('./.docs/');
+system ([OCTAVE ' ./tidy.m']);
+cd ('../');
+fprintf ('\n');
 
-% Remove the manuals.
-[status ~]  = system ('test -e *.pdf');
-if ~ status;
+
+
+% Check for files to delete.
+disp ('Check for documentation artifacts to remove ...');
+
+if UNIXCMDS;
+    PDFTODELETE = ~ unix ('test -e *.pdf');
+end;
+
+fprintf ('PDF: ');
+if PDFTODELETE;
     delete ('*.pdf');
+    disp ('found and removed.');
+else;
+    disp ('none.');
 end;
 
 
