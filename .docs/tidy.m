@@ -48,6 +48,20 @@
 
 %%%%
 %%
+%% Variables.
+%%
+%%%%
+
+% System information.
+UNIXCMDS    = 0;
+
+% Control variables.
+PDFTODELETE = 0;
+
+
+
+%%%%
+%%
 %% Build steps.
 %%
 %%%%
