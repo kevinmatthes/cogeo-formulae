@@ -36,6 +36,7 @@
 %%              returned.
 %%
 %%      SEE ALSO
+%%          isnumeric
 %%          length
 %%          nargin
 %%          sparse
@@ -65,10 +66,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function M = move (X = NaN);
-    if nargin == 1 && length (X) == 3;
-        M = sparse ([1 0 0 X(1); 0 1 0 X(2); 0 0 1 X(3); 0 0 0 1]);
-    else;
-        M = NaN;
+    M = NaN;
+
+    if nargin == 1 && isnumeric (X);
+        switch length (X);
+            case 3;
+                M = sparse ([1 0 0 X(1); 0 1 0 X(2); 0 0 1 X(3); 0 0 0 1]);
+        end;
     end;
 
     return;
