@@ -36,18 +36,11 @@
 ##
 
 # Software.
-COPY	:= cp
 LISTER	:= cat
-NEWDIR	:= mkdir
 PANDOC	:= pandoc
-REMOVE	:= rm
 
 # Software flags.
 PFLAGS	:= -N
-
-# Directories.
-SUBMODDIR	:= ../../.docs/
-DIRS		:= $(SUBMODDIR)
 
 # File types.
 MARKDOWN	:= $(wildcard ./*.md)
@@ -73,25 +66,13 @@ SOFTWARE		:= ./software_requirements.md
 #
 ##
 
-.PHONY: default software submodule tidy
+.PHONY: default
 
 default: $(PDF)
-
-$(DIRS):
-	$(NEWDIR) $@
 
 $(PDF): $(CONTRIBUTING) $(LICENSE) $(MARKDOWN) $(README) $(YAML)
 	$(LISTER)	$(YAML) $(NEWPAGE) $(README) $(NEWPAGE) $(SOFTWARE) $(NEWPAGE) \
 				$(CONTRIBUTING) $(NEWPAGE)  $(LSTART) $(LICENSE) $(LSTOP)      \
 	| $(PANDOC) $(PFLAGS) -o $@
-
-software: $(SOFTWARE) $(SUBMODDIR)
-	$(COPY) $(SOFTWARE) $(SUBMODDIR)
-
-submodule: $(LSTART) $(LSTOP) $(META_CONST) $(NEWPAGE) $(SELF) $(SUBMODDIR)
-	$(COPY) $(LSTART) $(LSTOP) $(META_CONST) $(NEWPAGE) $(SELF) $(SUBMODDIR)
-
-tidy: $(PDF)
-	$(REMOVE) $^
 
 ################################################################################
