@@ -73,6 +73,7 @@ fprintf ('%%%%%%%% Begin documentation clean-up. %%%%%%%%\n\n');
 
 % Determine the operating system.
 fprintf ('Determine OS: ');
+
 if isunix;
     UNIXCMDS = 1;
     disp ('UNIX.');

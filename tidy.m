@@ -69,6 +69,23 @@ PDFTODELETE = 0;
 %%
 %%%%
 
+% Information banner.
+fprintf ('%%%%%%%% Begin repository clean-up. %%%%%%%%\n\n');
+
+
+
+% Determine the operating system.
+fprintf ('Determine OS: ');
+
+if isunix;
+    UNIXCMDS = 1;
+    disp ('UNIX.');
+elseif ispc;
+    disp ('Windows.');
+end;
+
+
+
 % Remove any documentation artifacts.
 system ([OCTAVE ' tidy.m']);
 
@@ -77,5 +94,10 @@ system ([OCTAVE ' tidy.m']);
 if ~ status;
     delete ('*.pdf');
 end;
+
+
+
+% Leave the script.
+fprintf ('\n%%%%%%%% End repository clean-up. %%%%%%%%\n');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
