@@ -49,6 +49,13 @@
 %%          isnumeric
 %%          length
 %%          nargin
+%%          rot3d
+%%          rot3x
+%%          rot3xd
+%%          rot3y
+%%          rot3yd
+%%          rot3z
+%%          rot3zd
 %%          sin
 %%          sparse
 %%

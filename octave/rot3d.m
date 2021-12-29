@@ -50,6 +50,12 @@
 %%          length
 %%          nargin
 %%          rot3
+%%          rot3x
+%%          rot3xd
+%%          rot3y
+%%          rot3yd
+%%          rot3z
+%%          rot3zd
 %%
 %%%%
 %%
