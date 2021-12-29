@@ -45,6 +45,8 @@
 %%
 %%      SEE ALSO
 %%          cos
+%%          isnan
+%%          isnumeric
 %%          length
 %%          nargin
 %%          sin
@@ -76,30 +78,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function R = rot3 (PHI = NaN, X = [1 1 1]);
-    if nargin == 1 && length (PHI) == 1;
+    c   = NaN;
+    ic  = NaN;
+    s   = NaN;
+    R   = NaN;
+
+    if nargin >= 1 && isnumeric (PHI) && length (PHI) == 1;
         c   = cos (PHI);
         ic  = 1 - c;
         s   = sin (PHI);
+    end;
 
+    v = ~ isnan (c) && ~ isnan (ic) && ~ isnan (s);
+
+    if v && nargin == 1;
         a = ic + s;
         b = ic - s;
 
         R = sparse ([1 b a 0; a 1 b 0; b a 1 0; 0 0 0 1]);
-    elseif nargin == 2 && length (PHI) == 1 && length (X) == 3;
-        c   = cos (PHI);
-        ic  = 1 - c;
-        s   = sin (PHI);
-        x   = X(1);
-        y   = X(2);
-        z   = X(3);
+    elseif v && nargin == 2 && isnumeric (X) && length (X) == 3;
+        x = X(1);
+        y = X(2);
+        z = X(3);
 
-        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0;
-                        ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0;
-                        ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0;
-                        0           0           0           1
+        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0
+                    ;   ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0
+                    ;   ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0
+                    ;   0           0           0           1
                     ]);
-    else;
-        R = NaN;
     end;
 
     return;
