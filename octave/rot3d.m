@@ -44,13 +44,12 @@
 %%              be returned.
 %%
 %%      SEE ALSO
-%%          cosd
+%%          deg2rad
 %%          isnan
 %%          isnumeric
 %%          length
 %%          nargin
-%%          sind
-%%          sparse
+%%          rot3
 %%
 %%%%
 %%
@@ -78,34 +77,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function R = rot3d (PHI = NaN, X = [1 1 1]);
-    c   = NaN;
-    ic  = NaN;
-    s   = NaN;
+    phi = NaN;
     R   = NaN;
 
     if nargin >= 1 && isnumeric (PHI) && length (PHI) == 1;
-        c   = cosd (PHI);
-        ic  = 1 - c;
-        s   = sind (PHI);
+        phi = deg2rad (PHI);
     end;
 
-    v = ~ isnan (c) && ~ isnan (ic) && ~ isnan (s);
-
-    if v && nargin == 1;
-        a = ic + s;
-        b = ic - s;
-
-        R = sparse ([1 b a 0; a 1 b 0; b a 1 0; 0 0 0 1]);
-    elseif v && nargin == 2 && isnumeric (X) && length (X) == 3;
-        x = X(1);
-        y = X(2);
-        z = X(3);
-
-        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0
-                    ;   ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0
-                    ;   ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0
-                    ;   0           0           0           1
-                    ]);
+    if ~ isnan (phi) && nargin == 1;
+        R = rot3 (phi);
+    elseif ~ isnan (phi) && nargin == 2 && isnumeric (X) && length (X) == 3;
+        R = rot3 (phi, X);
     end;
 
     return;
