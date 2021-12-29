@@ -37,6 +37,7 @@
 %%
 %%      SEE ALSO
 %%          isnumeric
+%%          diag
 %%          length
 %%          nargin
 %%          sparse
@@ -69,10 +70,20 @@ function M = move (X = NaN);
     M = NaN;
 
     if nargin == 1 && isnumeric (X);
-        switch length (X);
-            case 3;
-                M = sparse ([1 0 0 X(1); 0 1 0 X(2); 0 0 1 X(3); 0 0 0 1]);
+        d = [];
+        l = length (X);
+
+        for n = 1 : l + 1;
+            d = [d 1];
         end;
+
+        M = diag (d);
+
+        for n = 1 : l;
+            M(n, l + 1) = X(n);
+        end;
+
+        M = sparse (M);
     end;
 
     return;
