@@ -38,6 +38,7 @@
 %%
 %%      SEE ALSO
 %%          NaN
+%%          isnumeric
 %%          min
 %%          nargin
 %%          norm
@@ -70,7 +71,7 @@
 function V = normalise (X = NaN);
     V = NaN;
 
-    if nargin == 1 && min (size (X)) == 1 && norm (X) ~= 0;
+    if nargin == 1 && isnumeric (X) && min (size (X)) == 1 && norm (X) ~= 0;
         V = X / norm (X);
     end;
 
