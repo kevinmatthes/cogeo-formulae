@@ -68,10 +68,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function V = normalise (X = NaN);
+    V = NaN;
+
     if nargin == 1 && min (size (X)) == 1 && norm (X) ~= 0;
         V = X / norm (X);
-    else;
-        V = NaN;
     end;
 
     return;
