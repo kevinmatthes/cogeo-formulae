@@ -18,15 +18,15 @@
 %%
 %%%%
 %%
-%% -- R = rot3d (phi, X)
+%% -- R = rot3d (PHI, X)
 %%      Determine the homogenous rotation matrix for a rotation around a custom
-%%      axis X by the angle phi in a 3D space, measured in degrees.
+%%      axis X by the angle PHI in a 3D space, measured in degrees.
 %%
 %%      PARAMETERS
-%%          phi
+%%          PHI
 %%              The angle to rotate by.  Measured in degrees.
 %%
-%%              In case that no value for phi is passed to the function, NaN is
+%%              In case that no value for PHI is passed to the function, NaN is
 %%              assumed.
 %%
 %%          X
@@ -45,6 +45,8 @@
 %%
 %%      SEE ALSO
 %%          cosd
+%%          isnan
+%%          isnumeric
 %%          length
 %%          nargin
 %%          sind
@@ -75,31 +77,35 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function R = rot3d (phi = NaN, X = [1 1 1]);
-    if nargin == 1 && length (phi) == 1;
-        c   = cosd (phi);
-        ic  = 1 - c;
-        s   = sind (phi);
+function R = rot3d (PHI = NaN, X = [1 1 1]);
+    c   = NaN;
+    ic  = NaN;
+    s   = NaN;
+    R   = NaN;
 
+    if nargin >= 1 && isnumeric (PHI) && length (PHI) == 1;
+        c   = cosd (PHI);
+        ic  = 1 - c;
+        s   = sind (PHI);
+    end;
+
+    v = ~ isnan (c) && ~ isnan (ic) && ~ isnan (s);
+
+    if v && nargin == 1;
         a = ic + s;
         b = ic - s;
 
         R = sparse ([1 b a 0; a 1 b 0; b a 1 0; 0 0 0 1]);
-    elseif nargin == 2 && length (phi) == 1 && length (X) == 3;
-        c   = cosd (phi);
-        ic  = 1 - c;
-        s   = sind (phi);
-        x   = X(1);
-        y   = X(2);
-        z   = X(3);
+    elseif v && nargin == 2 && isnumeric (X) && length (X) == 3;
+        x = X(1);
+        y = X(2);
+        z = X(3);
 
-        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0;
-                        ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0;
-                        ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0;
-                        0           0           0           1
+        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0
+                    ;   ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0
+                    ;   ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0
+                    ;   0           0           0           1
                     ]);
-    else;
-        R = NaN;
     end;
 
     return;
