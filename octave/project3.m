@@ -18,38 +18,39 @@
 %%
 %%%%
 %%
-%% -- V = affinise (X)
-%%      Reduce the dimension of a vector.
+%% -- P = project3 (V, N)
+%%      Determine the perpendicular projection matrix along the vector V to the
+%%      plane with the normal N.
 %%
 %%      PARAMETERS
-%%          X
-%%              The vector to reduce the dimension of.  In case it is not a
+%%          V
+%%              The vector to project along.  In case it is not a vector but a
+%%              matrix, NaN will be returned.
+%%
+%%              In case that no value for V is passed to the function, NaN is
+%%              assumed.
+%%
+%%          N
+%%              The normal of the plane to project on.  In case it is not a
 %%              vector but a matrix, NaN will be returned.
 %%
-%%              In case that no value for X is passed to the function, NaN is
+%%              In case that no value for N is passed to the function, NaN is
 %%              assumed.
 %%
 %%      RETURN
-%%          V
-%%              The vector with the reduced dimension.
+%%          P
+%%              The sparse projection matrix.
 %%
-%%              In case that no parameter or more than one is given, NaN will be
-%%              returned.
+%%              In case that no parameter or more than two are given, NaN will
+%%              be returned.
 %%
 %%      SEE ALSO
-%%          :
 %%          NaN
-%%          homogenise
-%%          isnumeric
-%%          length
-%%          min
-%%          nargin
-%%          size
 %%
 %%%%
 %%
 %%      FILE
-%%          affinise.m
+%%          project3.m
 %%
 %%      BRIEF
 %%          Reduce the dimension of a vector.
@@ -70,20 +71,8 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function V = affinise (X = NaN);
-    V = NaN;
-    l = NaN;
-
-    if nargin == 1 && isnumeric (X) && min (size (X)) == 1;
-        l = length (X);
-    end;
-
-    if l == 1;
-        V = [];
-    elseif l > 1;
-        V = X(1 : l - 1) / X(l);
-    end;
-
+function P = project3 (V = NaN, N = NaN);
+    P = NaN;
     return;
 end;
 
