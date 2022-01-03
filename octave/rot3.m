@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright (C) 2021 Kevin Matthes
+%% Copyright (C) 2021─2022 Kevin Matthes
 %%
 %% This program is free software; you can redistribute it and/or modify
 %% it under the terms of the GNU General Public License as published by
@@ -44,11 +44,9 @@
 %%              be returned.
 %%
 %%      SEE ALSO
-%%          cos
-%%          isnan
-%%          isnumeric
-%%          length
-%%          nargin
+%%          NaN
+%%          move
+%%          project
 %%          rot3d
 %%          rot3x
 %%          rot3xd
@@ -56,8 +54,6 @@
 %%          rot3yd
 %%          rot3z
 %%          rot3zd
-%%          sin
-%%          sparse
 %%
 %%%%
 %%
@@ -72,11 +68,11 @@
 %%          Kevin Matthes
 %%
 %%      COPYRIGHT
-%%          (C) 2021 Kevin Matthes.
+%%          (C) 2021─2022 Kevin Matthes.
 %%          This file is licensed GPL 2 as of June 1991.
 %%
 %%      DATE
-%%          2021
+%%          2021─2022
 %%
 %%      NOTE
 %%          See `LICENSE' for full license.
@@ -85,28 +81,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function R = rot3 (PHI = NaN, X = [1 1 1]);
-    c   = NaN;
-    ic  = NaN;
-    s   = NaN;
     R   = NaN;
 
-    if nargin >= 1 && isnumeric (PHI) && length (PHI) == 1;
+    valid.PHI   =   isnumeric (PHI)
+                &&  ~ isnan (PHI)
+                &&  size (PHI) == [1 1];
+    valid.X     =   isnumeric (X)
+                &&  ~ isnan (X)
+                &&  min (size (X)) == 1
+                &&  length (X) == 3;
+
+    if valid.PHI && valid.X;
         c   = cos (PHI);
         ic  = 1 - c;
         s   = sin (PHI);
-    end;
-
-    v = ~ isnan (c) && ~ isnan (ic) && ~ isnan (s);
-
-    if v && nargin == 1;
-        a = ic + s;
-        b = ic - s;
-
-        R = sparse ([1 b a 0; a 1 b 0; b a 1 0; 0 0 0 1]);
-    elseif v && nargin == 2 && isnumeric (X) && length (X) == 3;
-        x = X(1);
-        y = X(2);
-        z = X(3);
+        x   = X(1);
+        y   = X(2);
+        z   = X(3);
 
         R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0
                     ;   ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0
