@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright (C) 2021 Kevin Matthes
+%% Copyright (C) 2021─2022 Kevin Matthes
 %%
 %% This program is free software; you can redistribute it and/or modify
 %% it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 %%              The vector to increase the dimension of.  In case it is not a
 %%              vector but a matrix, NaN will be returned.
 %%
-%%              In case that no value for X is passed to the function, [] is
+%%              In case that no value for X is passed to the function, NaN is
 %%              assumed.  In case X is an empty vector, 1 will be returned.
 %%
 %%      RETURN
@@ -39,10 +39,6 @@
 %%      SEE ALSO
 %%          NaN
 %%          affinise
-%%          isnumeric
-%%          min
-%%          nargin
-%%          size
 %%
 %%%%
 %%
@@ -56,11 +52,11 @@
 %%          Kevin Matthes
 %%
 %%      COPYRIGHT
-%%          (C) 2021 Kevin Matthes.
+%%          (C) 2021─2022 Kevin Matthes.
 %%          This file is licensed GPL 2 as of June 1991.
 %%
 %%      DATE
-%%          2021
+%%          2021─2022
 %%
 %%      NOTE
 %%          See `LICENSE' for full license.
@@ -68,20 +64,20 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function V = homogenise (X = []);
+function V = homogenise (X = NaN);
     V = NaN;
     d = NaN;
 
-    if nargin == 0;
-        d = 0;
-    elseif nargin == 1 && isnumeric (X);
-        d = min (size (X));
-    end;
+    valid.X = size (X) == [0 0] || isnumeric (X) && ~ isnan (X);
 
-    if d == 0;
-        V = 1;
-    elseif d == 1;
-        V = [X 1];
+    if valid.X;
+        switch min (size (X));
+            case 0;
+                V = 1;
+
+            case 1;
+                V = [X 1];
+        end;
     end;
 
     return;

@@ -68,7 +68,7 @@ function V = affinise (X = NaN);
     V = NaN;
     l = NaN;
 
-    valid.X = ~ isnan (X) && isnumeric (X) && min (size (X)) == 1;
+    valid.X = isnumeric (X) && ~ isnan (X) && min (size (X)) == 1;
 
     if valid.X && nargin == 1;
         l = length (X);
