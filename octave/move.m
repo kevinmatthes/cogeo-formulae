@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright (C) 2021 Kevin Matthes
+%% Copyright (C) 2021─2022 Kevin Matthes
 %%
 %% This program is free software; you can redistribute it and/or modify
 %% it under the terms of the GNU General Public License as published by
@@ -36,11 +36,9 @@
 %%              returned.
 %%
 %%      SEE ALSO
-%%          isnumeric
-%%          diag
-%%          length
-%%          nargin
-%%          sparse
+%%          NaN
+%%          project
+%%          rot3
 %%
 %%%%
 %%
@@ -54,11 +52,11 @@
 %%          Kevin Matthes
 %%
 %%      COPYRIGHT
-%%          (C) 2021 Kevin Matthes.
+%%          (C) 2021─2022 Kevin Matthes.
 %%          This file is licensed GPL 2 as of June 1991.
 %%
 %%      DATE
-%%          2021
+%%          2021─2022
 %%
 %%      NOTE
 %%          See `LICENSE' for full license.
@@ -69,7 +67,9 @@
 function M = move (X = NaN);
     M = NaN;
 
-    if nargin == 1 && isnumeric (X);
+    valid.X = ~ isnan (X) && isnumeric (X) && min (size (X)) == 1;
+
+    if valid.X && nargin == 1;
         d = [];
         l = length (X);
 

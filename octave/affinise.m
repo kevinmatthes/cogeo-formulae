@@ -37,14 +37,8 @@
 %%              returned.
 %%
 %%      SEE ALSO
-%%          :
 %%          NaN
 %%          homogenise
-%%          isnumeric
-%%          length
-%%          min
-%%          nargin
-%%          size
 %%
 %%%%
 %%
@@ -71,16 +65,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function V = affinise (X = NaN);
-    valid.x = 0;
-
     V = NaN;
     l = NaN;
 
-    if ~ isnan (X) && isnumeric (X) && min (size (X)) == 1;
-        valid.x = 1;
-    end;
+    valid.X = ~ isnan (X) && isnumeric (X) && min (size (X)) == 1;
 
-    if valid.x && nargin == 1;
+    if valid.X && nargin == 1;
         l = length (X);
     end;
 
