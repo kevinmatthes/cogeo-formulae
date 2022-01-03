@@ -18,14 +18,13 @@
 %%
 %%%%
 %%
-%% -- P = project3 (V, N)
-%%      Determine the perpendicular projection matrix along the vector V to the
-%%      plane with the normal N.
+%% -- P = project (V, N)
+%%      Project the vector V onto the plane with the normal N.
 %%
 %%      PARAMETERS
 %%          V
-%%              The vector to project along.  In case it is not a vector but a
-%%              matrix, NaN will be returned.
+%%              The vector to project onto the plane.  In case it is not a
+%%              vector but a matrix, NaN will be returned.
 %%
 %%              In case that no value for V is passed to the function, NaN is
 %%              assumed.
@@ -39,7 +38,7 @@
 %%
 %%      RETURN
 %%          P
-%%              The sparse projection matrix.
+%%              The projected vector.
 %%
 %%              In case that no parameter or more than two are given, NaN will
 %%              be returned.
@@ -50,10 +49,10 @@
 %%%%
 %%
 %%      FILE
-%%          project3.m
+%%          project.m
 %%
 %%      BRIEF
-%%          Reduce the dimension of a vector.
+%%          Project a vector onto a plane.
 %%
 %%      AUTHOR
 %%          Kevin Matthes
@@ -71,7 +70,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function P = project3 (V = NaN, N = NaN);
+function P = project (V = NaN, N = NaN);
     P = NaN;
     return;
 end;
