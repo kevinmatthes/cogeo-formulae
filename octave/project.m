@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright (C) 2021 Kevin Matthes
+%% Copyright (C) 2021─2022 Kevin Matthes
 %%
 %% This program is free software; you can redistribute it and/or modify
 %% it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@
 %%
 %%      SEE ALSO
 %%          NaN
+%%          normalise
 %%
 %%%%
 %%
@@ -58,11 +59,11 @@
 %%          Kevin Matthes
 %%
 %%      COPYRIGHT
-%%          (C) 2021 Kevin Matthes.
+%%          (C) 2021─2022 Kevin Matthes.
 %%          This file is licensed GPL 2 as of June 1991.
 %%
 %%      DATE
-%%          2021
+%%          2021─2022
 %%
 %%      NOTE
 %%          See `LICENSE' for full license.
@@ -72,6 +73,15 @@
 
 function P = project (V = NaN, N = NaN);
     P = NaN;
+
+    valid.N = isnumeric (N) && ~ isnan (N) && min (size (N)) == 1;
+    valid.V = isnumeric (V) && ~ isnan (V) && min (size (V)) == 1;
+
+    if valid.N && valid.V && nargin == 2 && length (N) == length (V);
+        n = normalise (N);
+        P = dot (n, V) * n;
+    end;
+
     return;
 end;
 

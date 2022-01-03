@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright (C) 2021 Kevin Matthes
+%% Copyright (C) 2021─2022 Kevin Matthes
 %%
 %% This program is free software; you can redistribute it and/or modify
 %% it under the terms of the GNU General Public License as published by
@@ -38,11 +38,7 @@
 %%
 %%      SEE ALSO
 %%          NaN
-%%          isnumeric
-%%          min
-%%          nargin
-%%          norm
-%%          size
+%%          project
 %%
 %%%%
 %%
@@ -56,11 +52,11 @@
 %%          Kevin Matthes
 %%
 %%      COPYRIGHT
-%%          (C) 2021 Kevin Matthes.
+%%          (C) 2021─2022 Kevin Matthes.
 %%          This file is licensed GPL 2 as of June 1991.
 %%
 %%      DATE
-%%          2021
+%%          2021─2022
 %%
 %%      NOTE
 %%          See `LICENSE' for full license.
@@ -71,7 +67,9 @@
 function V = normalise (X = NaN);
     V = NaN;
 
-    if nargin == 1 && isnumeric (X) && min (size (X)) == 1 && norm (X) ~= 0;
+    valid.X = isnumeric (X) && ~ isnan (X) && min (size (X)) == 1;
+
+    if valid.X && nargin == 1 && norm (X) ~= 0;
         V = X / norm (X);
     end;
 
