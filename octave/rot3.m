@@ -81,15 +81,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function R = rot3 (PHI = NaN, X = [1 1 1]);
-    R   = NaN;
+    R = NaN;
 
-    valid.PHI   =   isnumeric (PHI)
-                &&  ~ isnan (PHI)
-                &&  size (PHI) == [1 1];
-    valid.X     =   isnumeric (X)
-                &&  ~ isnan (X)
-                &&  min (size (X)) == 1
-                &&  length (X) == 3;
+    valid.PHI   = isnumeric (PHI) && ~ isnan (PHI) && size (PHI) == [1 1];
+    valid.X     = isnumeric (X) && ~ isnan (X) && ~ common_size (X, 1 : 3);
 
     if valid.PHI && valid.X;
         c   = cos (PHI);
