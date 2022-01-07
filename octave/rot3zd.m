@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright (C) 2021 Kevin Matthes
+%% Copyright (C) 2021─2022 Kevin Matthes
 %%
 %% This program is free software; you can redistribute it and/or modify
 %% it under the terms of the GNU General Public License as published by
@@ -37,9 +37,9 @@
 %%              returned.
 %%
 %%      SEE ALSO
-%%          isnumeric
-%%          length
-%%          nargin
+%%          NaN
+%%          move
+%%          project
 %%          rot3
 %%          rot3d
 %%          rot3x
@@ -61,11 +61,11 @@
 %%          Kevin Matthes
 %%
 %%      COPYRIGHT
-%%          (C) 2021 Kevin Matthes.
+%%          (C) 2021─2022 Kevin Matthes.
 %%          This file is licensed GPL 2 as of June 1991.
 %%
 %%      DATE
-%%          2021
+%%          2021─2022
 %%
 %%      NOTE
 %%          See `LICENSE' for full license.
@@ -75,8 +75,10 @@
 
 function R = rot3zd (PHI = NaN);
     R = NaN;
+    
+    valid.PHI = isnumeric (PHI) && ~ isnan (PHI) && size (PHI) == [1 1];
 
-    if nargin == 1 && isnumeric (PHI) && length (PHI) == 1;
+    if valid.PHI && nargin == 1;
         R = rot3d (PHI, [0 0 1]);
     end;
 
