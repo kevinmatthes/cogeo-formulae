@@ -79,7 +79,7 @@ function P = project (V = NaN, N = NaN);
 
     if valid.N && valid.V && nargin == 2 && length (N) == length (V);
         n = normalise (N);
-        P = dot (n, V) * n;
+        P = V - dot (n, V) * n;
     end;
 
     return;
