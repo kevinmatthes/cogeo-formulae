@@ -94,11 +94,10 @@ function R = rot3 (PHI = NaN, X = [1 1 1]);
         y   = X(2);
         z   = X(3);
 
-        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0
-                    ;   ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0
-                    ;   ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0
-                    ;   0           0           0           1
-                    ]);
+        R = sparse ([   c+ic*x^2    ic*x*y-s*z  ic*x*z+s*y  0   ;
+                        ic*x*y+s*z  c+ic*y^2    ic*y*z-s*x  0   ;
+                        ic*x*z-s*y  ic*y*z+s*x  c+ic*z^2    0   ;
+                        0           0           0           1   ]);
     end;
 
     return;
